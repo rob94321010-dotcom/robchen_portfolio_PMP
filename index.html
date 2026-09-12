@@ -14,14 +14,7 @@
             theme: {
                 extend: {
                     fontFamily: { sans: ['Inter', 'sans-serif'] },
-                    colors: {
-                        brand: {
-                            navy: '#0f172a',
-                            blue: '#1d4ed8',
-                            light: '#f8fafc',
-                            gray: '#64748b',
-                        }
-                    }
+                    colors: { brand: { navy: '#0f172a', blue: '#1d4ed8', light: '#f8fafc', gray: '#64748b' } }
                 }
             }
         }
@@ -35,41 +28,53 @@
         .delay-100 { animation-delay: 100ms; }
         .delay-200 { animation-delay: 200ms; }
         .delay-300 { animation-delay: 300ms; }
-        /* Project table */
         .proj-table th { background: #1d4ed8; color: white; padding: 10px 14px; text-align: left; font-size: 13px; font-weight: 600; }
         .proj-table td { padding: 10px 14px; font-size: 13px; border-bottom: 1px solid #e2e8f0; vertical-align: top; }
         .proj-table tr:nth-child(even) td { background: #f8fafc; }
         .proj-table tr:hover td { background: #eff6ff; }
+        .lang-toggle { display: flex; border: 1.5px solid #3b82f6; border-radius: 6px; overflow: hidden; flex-shrink: 0; }
+        .lang-btn { padding: 5px 12px; font-size: 12px; font-weight: 600; border: none; cursor: pointer; background: transparent; color: #93c5fd; transition: background 0.2s, color 0.2s; white-space: nowrap; }
+        .lang-btn.active { background: #1d4ed8; color: white; }
+        body.lang-en [data-zh] { display: none !important; }
+        body.lang-zh [data-en] { display: none !important; }
     </style>
 </head>
-<body class="bg-brand-light text-slate-800 font-sans antialiased selection:bg-brand-blue selection:text-white">
+<body class="bg-brand-light text-slate-800 font-sans antialiased lang-en">
 
 <!-- NAV -->
 <nav class="glass-nav fixed w-full z-50 top-0 border-b border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="flex justify-between items-center h-16">
-            <a href="#" class="text-white font-bold text-xl tracking-wider">ROB <span class="text-blue-400">CHEN</span></a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#about" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">About</a>
-                <a href="#experience" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Experience</a>
-                <a href="#projects" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Projects</a>
-                <a href="#skills" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Skills</a>
-                <a href="#contact" class="text-slate-300 hover:text-white px-3 py-2 text-sm font-medium transition-colors">Contact</a>
+        <div class="flex justify-between items-center h-16 gap-3">
+            <a href="#" class="text-white font-bold text-xl tracking-wider flex-shrink-0">ROB <span class="text-blue-400">CHEN</span></a>
+            <div class="hidden md:flex space-x-6 flex-1 justify-center">
+                <a href="#about" class="text-slate-300 hover:text-white px-2 py-2 text-sm font-medium transition-colors"><span data-en>About</span><span data-zh>關於</span></a>
+                <a href="#experience" class="text-slate-300 hover:text-white px-2 py-2 text-sm font-medium transition-colors"><span data-en>Experience</span><span data-zh>工作經歷</span></a>
+                <a href="#projects" class="text-slate-300 hover:text-white px-2 py-2 text-sm font-medium transition-colors"><span data-en>Projects</span><span data-zh>專案</span></a>
+                <a href="#skills" class="text-slate-300 hover:text-white px-2 py-2 text-sm font-medium transition-colors"><span data-en>Skills</span><span data-zh>技能</span></a>
+                <a href="#contact" class="text-slate-300 hover:text-white px-2 py-2 text-sm font-medium transition-colors"><span data-en>Contact</span><span data-zh>聯絡</span></a>
+                <a href="https://rob94321010-dotcom.github.io/robchen-portfolio/" target="_blank" class="bg-blue-600 hover:bg-blue-500 text-white px-3 py-1.5 text-sm font-medium rounded-full transition-colors flex-shrink-0">
+                    <span data-en>🎨 Creative Portfolio</span><span data-zh>🎨 創作作品集</span>
+                </a>
             </div>
-            <div class="md:hidden flex items-center">
-                <button id="mobile-menu-btn" class="text-slate-300 hover:text-white focus:outline-none">
-                    <i class="fas fa-bars text-2xl"></i>
+            <div class="flex items-center gap-3">
+                <div class="lang-toggle">
+                    <button class="lang-btn active" onclick="setLang('en')">EN</button>
+                    <button class="lang-btn" onclick="setLang('zh')">中文</button>
+                </div>
+                <button id="mobile-menu-btn" class="md:hidden text-slate-300 hover:text-white focus:outline-none">
+                    <i class="fas fa-bars text-xl"></i>
                 </button>
             </div>
         </div>
     </div>
     <div id="mobile-menu" class="hidden md:hidden bg-brand-navy border-t border-slate-800">
-        <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="#about" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link">About</a>
-            <a href="#experience" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link">Experience</a>
-            <a href="#projects" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link">Projects</a>
-            <a href="#skills" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link">Skills</a>
-            <a href="#contact" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link">Contact</a>
+        <div class="px-2 pt-2 pb-3 space-y-1">
+            <a href="#about" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link"><span data-en>About</span><span data-zh>關於</span></a>
+            <a href="#experience" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link"><span data-en>Experience</span><span data-zh>工作經歷</span></a>
+            <a href="#projects" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link"><span data-en>Projects</span><span data-zh>專案</span></a>
+            <a href="#skills" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link"><span data-en>Skills</span><span data-zh>技能</span></a>
+            <a href="#contact" class="block text-slate-300 hover:text-white px-3 py-2 text-base font-medium mobile-link"><span data-en>Contact</span><span data-zh>聯絡</span></a>
+            <a href="https://rob94321010-dotcom.github.io/robchen-portfolio/" target="_blank" class="block text-blue-400 px-3 py-2 text-base font-medium">🎨 <span data-en>Creative Portfolio ↗</span><span data-zh>創作作品集 ↗</span></a>
         </div>
     </div>
 </nav>
@@ -78,23 +83,33 @@
 <header class="relative pt-32 pb-20 lg:pt-48 lg:pb-32 bg-gradient-to-br from-brand-navy via-slate-800 to-slate-900 overflow-hidden min-h-[85vh] flex items-center">
     <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#475569 1px, transparent 1px); background-size: 30px 30px;"></div>
     <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center text-center">
-        <span class="fade-in-up text-blue-400 font-semibold tracking-widest uppercase mb-4 text-sm md:text-base">PM Portfolio</span>
+        <span class="fade-in-up text-blue-400 font-semibold tracking-widest uppercase mb-4 text-sm">
+            <span data-en>PM Portfolio</span><span data-zh>專案管理作品集</span>
+        </span>
         <h1 class="fade-in-up delay-100 text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 tracking-tight">
-            Rob Chen <span class="text-slate-400 font-medium text-3xl md:text-5xl lg:text-6xl">(陳正立)</span>
+            Rob Chen <span class="text-slate-400 font-medium text-3xl md:text-5xl lg:text-6xl">（陳正立）</span>
         </h1>
         <h2 class="fade-in-up delay-200 text-xl md:text-2xl font-medium text-slate-300 mb-4 max-w-3xl">
             <i class="fas fa-plane-departure mr-2 text-blue-500"></i>
-            PMP®-Certified Project Manager | Aviation System Implementation Specialist
+            <span data-en>PMP®-Certified Project Manager | Aviation System Implementation Specialist</span>
+            <span data-zh>PMP® 認證專案管理師 | 航空系統導入專家</span>
         </h2>
         <p class="fade-in-up delay-200 text-base md:text-lg text-blue-400 font-medium mb-4">
-            PMP® #4379030 &nbsp;·&nbsp; TOEIC 940 &nbsp;·&nbsp; 6 Years Enterprise System Delivery (79 Months)
+            PMP® #4379030 &nbsp;·&nbsp; TOEIC 940 &nbsp;·&nbsp;
+            <span data-en>6 Years Enterprise System Delivery (79 Months)</span>
+            <span data-zh>六年企業系統交付實務（79 個月）</span>
         </p>
         <p class="fade-in-up delay-300 mt-2 text-lg md:text-xl text-slate-400 max-w-2xl leading-relaxed">
-            Specializing in Greenfield CMS implementations (Jeppesen, CTi Pegasys) and cross-cultural B2B stakeholder coordination across Europe, Oceania, and Asia-Pacific.
+            <span data-en>Specializing in Greenfield CMS implementations (Jeppesen, CTi Pegasys) and cross-cultural B2B stakeholder coordination across Europe, Oceania, and Asia-Pacific.</span>
+            <span data-zh>專精 Greenfield CMS 系統導入（Jeppesen、CTi Pegasys），具備跨歐洲、大洋洲及亞太地區的 B2B 跨文化利害關係人協調實務。</span>
         </p>
         <div class="fade-in-up delay-300 mt-10 flex flex-wrap justify-center gap-4">
-            <a href="#contact" class="bg-brand-blue hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-full shadow-lg shadow-blue-500/30 transition-all duration-300">Get in Touch</a>
-            <a href="#projects" class="bg-transparent border border-slate-500 hover:border-slate-300 text-slate-300 hover:text-white font-medium py-3 px-8 rounded-full transition-all duration-300">View Projects</a>
+            <a href="#contact" class="bg-brand-blue hover:bg-blue-600 text-white font-medium py-3 px-8 rounded-full shadow-lg shadow-blue-500/30 transition-all duration-300">
+                <span data-en>Get in Touch</span><span data-zh>與我聯絡</span>
+            </a>
+            <a href="#projects" class="bg-transparent border border-slate-500 hover:border-slate-300 text-slate-300 hover:text-white font-medium py-3 px-8 rounded-full transition-all duration-300">
+                <span data-en>View Projects</span><span data-zh>查看專案</span>
+            </a>
         </div>
     </div>
 </header>
@@ -103,41 +118,49 @@
 <section id="about" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">About Me</h2>
+            <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">
+                <span data-en>About Me</span><span data-zh>關於我</span>
+            </h2>
             <div class="w-24 h-1 bg-brand-blue mx-auto mt-4 rounded-full"></div>
         </div>
         <div class="flex flex-col lg:flex-row gap-12 items-center">
             <div class="w-full lg:w-1/2">
                 <div class="bg-slate-50 p-8 rounded-2xl border border-slate-100 shadow-sm relative">
                     <i class="fas fa-quote-left absolute text-4xl text-blue-100 top-4 left-4"></i>
-                    <p class="text-lg text-slate-600 leading-relaxed mb-6">
-                        With <strong class="text-brand-blue">15+ years in aviation operations</strong> and <strong class="text-brand-blue">6 years (79 months) of enterprise system delivery</strong>, I specialize in crew schedule planning and the end-to-end implementation of Crew Management Systems (CMS) — from Greenfield build to post-launch optimization.
+                    <p class="text-lg text-slate-600 leading-relaxed mb-6" data-en>
+                        With <strong class="text-brand-blue">15+ years in aviation operations</strong> and <strong class="text-brand-blue">6 years (79 months) of enterprise system delivery</strong>, I specialize in crew schedule planning and the end-to-end implementation of Crew Management Systems — from Greenfield build to post-launch optimization.
                     </p>
-                    <p class="text-lg text-slate-600 leading-relaxed">
-                        Based in New Taipei City, Taiwan, I hold a Master's degree in Comparative Literature (GPA 4.0) and am an award-winning bilingual poet — blending <strong class="text-slate-800">rigorous project management methodology</strong> with <strong class="text-slate-800">precise bilingual communication</strong> and cross-cultural stakeholder management across Sweden, Belgium, Australia, and Asia-Pacific.
+                    <p class="text-lg text-slate-600 leading-relaxed mb-6" data-zh>
+                        擁有超過 <strong class="text-brand-blue">15 年航空產業實務</strong>及 <strong class="text-brand-blue">六年（79 個月）企業系統端對端交付管理</strong>，專精機組排班規劃與機組管理系統（CMS）的完整導入——從零到一的 Greenfield 建置，到上線後的持續優化。
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed" data-en>
+                        Based in New Taipei City, Taiwan. M.A. in Comparative Literature (GPA 4.0) and award-winning bilingual author — blending <strong class="text-slate-800">rigorous project management methodology</strong> with <strong class="text-slate-800">precise bilingual communication</strong> across Sweden, Belgium, Australia, and Asia-Pacific.
+                    </p>
+                    <p class="text-lg text-slate-600 leading-relaxed" data-zh>
+                        居住於台灣新北市。東吳大學英美文學研究所碩士（GPA 4.0），獲獎雙語作家——將<strong class="text-slate-800">嚴謹的專案管理方法論</strong>與<strong class="text-slate-800">精準的雙語溝通能力</strong>應用於瑞典、比利時、澳洲及亞太地區的跨文化協作。
                     </p>
                 </div>
             </div>
             <div class="w-full lg:w-1/2 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div class="card-hover bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
                     <div class="w-12 h-12 bg-blue-50 text-brand-blue rounded-full flex items-center justify-center text-xl mb-4"><i class="fas fa-clock"></i></div>
-                    <h3 class="font-bold text-slate-900 mb-2">15+ Years</h3>
-                    <p class="text-sm text-slate-500">Aviation Industry Experience</p>
+                    <h3 class="font-bold text-slate-900 mb-2"><span data-en>15+ Years</span><span data-zh>15 年以上</span></h3>
+                    <p class="text-sm text-slate-500"><span data-en>Aviation Industry Experience</span><span data-zh>航空產業實務</span></p>
                 </div>
                 <div class="card-hover bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
                     <div class="w-12 h-12 bg-blue-50 text-brand-blue rounded-full flex items-center justify-center text-xl mb-4"><i class="fas fa-cogs"></i></div>
-                    <h3 class="font-bold text-slate-900 mb-2">79 Months</h3>
-                    <p class="text-sm text-slate-500">Enterprise System PM Delivery</p>
+                    <h3 class="font-bold text-slate-900 mb-2">79 <span data-en>Months</span><span data-zh>個月</span></h3>
+                    <p class="text-sm text-slate-500"><span data-en>Enterprise System PM Delivery</span><span data-zh>企業系統專案交付</span></p>
                 </div>
                 <div class="card-hover bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
                     <div class="w-12 h-12 bg-blue-50 text-brand-blue rounded-full flex items-center justify-center text-xl mb-4"><i class="fas fa-graduation-cap"></i></div>
-                    <h3 class="font-bold text-slate-900 mb-2">M.A. Comp. Lit.</h3>
-                    <p class="text-sm text-slate-500">GPA 4.0 · Bilingual EN/ZH</p>
+                    <h3 class="font-bold text-slate-900 mb-2">M.A. <span data-en>Comp. Lit.</span><span data-zh>英美文學碩士</span></h3>
+                    <p class="text-sm text-slate-500">GPA 4.0 · <span data-en>Bilingual EN/ZH</span><span data-zh>中英雙語</span></p>
                 </div>
                 <div class="card-hover bg-white p-6 rounded-xl border border-slate-200 shadow-sm flex flex-col items-center text-center">
                     <div class="w-12 h-12 bg-blue-50 text-brand-blue rounded-full flex items-center justify-center text-xl mb-4"><i class="fas fa-globe"></i></div>
-                    <h3 class="font-bold text-slate-900 mb-2">B2B Global</h3>
-                    <p class="text-sm text-slate-500">SE · BE · AU · TW · Asia-Pacific</p>
+                    <h3 class="font-bold text-slate-900 mb-2">B2B <span data-en>Global</span><span data-zh>跨國</span></h3>
+                    <p class="text-sm text-slate-500">SE · BE · AU · TW</p>
                 </div>
             </div>
         </div>
@@ -148,61 +171,72 @@
 <section id="experience" class="py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">Professional Experience</h2>
+            <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">
+                <span data-en>Professional Experience</span><span data-zh>工作經歷</span>
+            </h2>
             <div class="w-24 h-1 bg-brand-blue mx-auto mt-4 rounded-full"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
 
-            <div class="card-hover bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full">
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
                 <div class="h-2 bg-brand-blue"></div>
                 <div class="p-8 flex-grow">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-900 leading-tight">Planning Specialist &<br>Program Manager</h3>
+                        <h3 class="text-xl font-bold text-slate-900 leading-tight">
+                            <span data-en>Planning Specialist &<br>Program Manager</span>
+                            <span data-zh>計畫規劃經理</span>
+                        </h3>
                         <div class="bg-blue-50 text-brand-blue p-2 rounded-lg"><i class="fas fa-laptop-house"></i></div>
                     </div>
-                    <p class="text-md font-medium text-brand-blue mb-1">VeeOne (Sweden)</p>
-                    <p class="text-xs text-slate-400 mb-4">Apr 2022 – Present · Remote / Taiwan</p>
+                    <p class="text-md font-medium text-brand-blue mb-1">VeeOne <span class="text-slate-400 font-normal text-sm">(<span data-en>Sweden</span><span data-zh>瑞典</span>)</span></p>
+                    <p class="text-xs text-slate-400 mb-4">Apr 2022 – <span data-en>Present</span><span data-zh>至今</span> · <span data-en>Remote / Taiwan</span><span data-zh>遠距 / 台灣</span></p>
                     <ul class="text-slate-600 text-sm leading-relaxed space-y-2">
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Delivered B2B projects for Braathens Regional Airlines (SE), Brussels Airlines (BE), and Oceanian carriers</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Authored bilingual SOPs, system guides, and training materials in English</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Reduced organizational information gaps by 40% via knowledge management framework</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Coordinated cross-cultural teams across 4+ time zones</li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Delivered B2B projects for Braathens Regional Airlines (SE), Brussels Airlines (BE), and Oceanian carriers</span><span data-zh>服務瑞典 Braathens Regional Airlines、比利時 Brussels Airlines 及大洋洲航空客戶</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Authored bilingual SOPs, system guides, and training materials in English</span><span data-zh>負責英文系統操作說明、SOP 及訓練教材撰寫</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Reduced organizational information gaps by 40% via knowledge management framework</span><span data-zh>建立知識管理體系，組織資訊落差縮減 40%</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Coordinated cross-cultural teams across 4+ time zones</span><span data-zh>協調跨越 4 個以上時區的跨國遠距團隊</span></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="card-hover bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full">
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
                 <div class="h-2 bg-slate-800"></div>
                 <div class="p-8 flex-grow">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-900 leading-tight">Section Manager &<br>Senior Specialist</h3>
+                        <h3 class="text-xl font-bold text-slate-900 leading-tight">
+                            <span data-en>Section Manager &<br>Senior Specialist</span>
+                            <span data-zh>航員調派課課長 / 資深專員</span>
+                        </h3>
                         <div class="bg-slate-100 text-slate-700 p-2 rounded-lg"><i class="fas fa-star"></i></div>
                     </div>
                     <p class="text-md font-medium text-brand-gray mb-1">STARLUX Airlines 星宇航空</p>
-                    <p class="text-xs text-slate-400 mb-4">Apr 2018 – Apr 2020 · Taipei, Taiwan</p>
+                    <p class="text-xs text-slate-400 mb-4">Apr 2018 – Apr 2020 · <span data-en>Taipei, Taiwan</span><span data-zh>台灣台北市</span></p>
                     <ul class="text-slate-600 text-sm leading-relaxed space-y-2">
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Founding team member — de facto dept. lead reporting directly to VP</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Led 22-month Greenfield CTi Pegasys CMS implementation as PM (Flight Ops Division)</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Authored Scheduling Guidelines and bilingual aviation operations manuals</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Certified Internal Lecturer — delivered training to new staff and flight crew</li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Founding team member — de facto dept. lead reporting directly to VP</span><span data-zh>創始核心成員——實質部門負責人，直接向副總報告</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Led 22-month Greenfield CTi Pegasys CMS implementation as PM (Flight Ops Division)</span><span data-zh>主導 22 個月 CTi Pegasys 機組管理系統 Greenfield 導入（航務處 PM）</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Authored Scheduling Guidelines and bilingual aviation operations manuals</span><span data-zh>主導編撰排班準則手冊及中英雙語航務操作手冊</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Certified Internal Lecturer — training for new staff and flight crew</span><span data-zh>獲企業內部講師認證，為新進同仁及飛行員授課</span></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="card-hover bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col h-full">
+            <div class="card-hover bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden flex flex-col">
                 <div class="h-2 bg-green-600"></div>
                 <div class="p-8 flex-grow">
                     <div class="flex justify-between items-start mb-2">
-                        <h3 class="text-xl font-bold text-slate-900 leading-tight">Assistant Dep. Section Manager &<br>Crew Schedule Planner</h3>
+                        <h3 class="text-xl font-bold text-slate-900 leading-tight">
+                            <span data-en>Assistant Dep. Section Manager &<br>Crew Schedule Planner</span>
+                            <span data-zh>助理副課長 / 前艙排班規劃師</span>
+                        </h3>
                         <div class="bg-green-50 text-green-700 p-2 rounded-lg"><i class="fas fa-globe-asia"></i></div>
                     </div>
                     <p class="text-md font-medium text-brand-gray mb-1">EVA Air 長榮航空</p>
-                    <p class="text-xs text-slate-400 mb-4">Jul 2011 – Mar 2018 · Taipei, Taiwan</p>
+                    <p class="text-xs text-slate-400 mb-4">Jul 2011 – Mar 2018 · <span data-en>Taipei, Taiwan</span><span data-zh>台灣台北市</span></p>
                     <ul class="text-slate-600 text-sm leading-relaxed space-y-2">
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Core testing & coordination lead in 18-month Jeppesen CMS implementation (10-person team)</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Endorsed by Boeing/Jeppesen as "veteran in aviation" with "leadership attributes"</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Managed domestic and international crew scheduling for global fleet</li>
-                        <li><i class="fas fa-check text-blue-400 mr-2"></i>Drafted and polished English correspondence for senior management</li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Core testing & coordination lead in 18-month Jeppesen CMS implementation (10-person team)</span><span data-zh>18 個月 Jeppesen CMS 導入核心測試與協調負責人（10 人跨部門團隊）</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Endorsed by Boeing/Jeppesen as "veteran in aviation" with "leadership attributes"</span><span data-zh>獲波音/Jeppesen 評為具備「領導特質」的航空資深專家</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Managed domestic and international crew scheduling for global fleet</span><span data-zh>負責國內外航線機組員排班規劃，涵蓋全球機隊</span></li>
+                        <li><i class="fas fa-check text-blue-400 mr-2"></i><span data-en>Drafted and polished English correspondence for senior management</span><span data-zh>協助高級主管撰寫及潤飾英文公告與對外信函</span></li>
                     </ul>
                 </div>
             </div>
@@ -215,95 +249,69 @@
 <section id="projects" class="py-20 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">Project Portfolio</h2>
+            <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">
+                <span data-en>Project Portfolio</span><span data-zh>專案組合</span>
+            </h2>
             <div class="w-24 h-1 bg-brand-blue mx-auto mt-4 rounded-full"></div>
-            <p class="text-slate-500 mt-4">79 months of end-to-end enterprise system delivery across aviation and SaaS</p>
+            <p class="text-slate-500 mt-4">
+                <span data-en>79 months of end-to-end enterprise system delivery across aviation and SaaS</span>
+                <span data-zh>79 個月橫跨航空與 SaaS 產業的企業系統端對端交付</span>
+            </p>
         </div>
         <div class="overflow-x-auto rounded-2xl border border-slate-200 shadow-sm">
-            <table class="proj-table w-full">
+            <table class="proj-table w-full" data-en>
                 <thead>
                     <tr>
-                        <th>Project</th>
-                        <th>Role / Team Size</th>
-                        <th>Duration</th>
-                        <th>System / Key Outcome</th>
+                        <th>Project</th><th>Role / Team</th><th>Duration</th><th>System / Key Outcome</th>
                     </tr>
                 </thead>
                 <tbody>
+                    <tr><td class="font-semibold text-slate-900">CTi Pegasys CMS — Greenfield Launch</td><td>Project Manager (5+)</td><td class="whitespace-nowrap">22 months</td><td>CTi Pegasys (AU) — Built from zero; full SOP library, IT-ops alignment, on-time go-live for STARLUX Airlines</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Jeppesen CMS Implementation</td><td>Testing Lead (10)</td><td class="whitespace-nowrap">18 months</td><td>Jeppesen (SE/Boeing) — Legacy data migration & UAT for EVA Air's global fleet; endorsed by Boeing/Jeppesen</td></tr>
+                    <tr><td class="font-semibold text-slate-900">CTi System Optimization</td><td>Project Manager (3)</td><td class="whitespace-nowrap">3 months</td><td>CTi Pegasys — Post-launch scheduling rule debug; iterative feedback loops improved system performance</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Braathens Regional Airlines Data Optimization</td><td>Data Analyst (3)</td><td class="whitespace-nowrap">12 months</td><td>Operational data → business insights; reduced crew dispatch costs (Sweden)</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Brussels Airlines Training Replanning</td><td>Planning Lead (3)</td><td class="whitespace-nowrap">7 months</td><td>Re-engineered training flight task flow documentation; 100% regulatory compliance achieved</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Cross-Cultural Team Management</td><td>Program Manager (3)</td><td class="whitespace-nowrap">8 months</td><td>Built high-trust communication framework across 4+ time zones</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Teams Knowledge Base Restructure</td><td>Project Manager (2)</td><td class="whitespace-nowrap">3 months</td><td>Centralized knowledge management — reduced information gaps by 40%</td></tr>
+                    <tr><td class="font-semibold text-slate-900">IQSMS Safety Management System</td><td>Testing Lead (3)</td><td class="whitespace-nowrap">4 months</td><td>IQSMS — Safety management system implementation & acceptance, STARLUX Airlines</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Crew Tech Assessment (Jetstar)</td><td>Tech Evaluator (4)</td><td class="whitespace-nowrap">3 months</td><td>Strategic technology evaluation for Jetstar's global crew scheduling systems</td></tr>
+                </tbody>
+            </table>
+            <table class="proj-table w-full" data-zh>
+                <thead>
                     <tr>
-                        <td class="font-semibold text-slate-900">CTi Pegasys CMS — Greenfield Launch</td>
-                        <td>Project Manager (5+)</td>
-                        <td class="whitespace-nowrap">22 months</td>
-                        <td>CTi Pegasys (AU) — Built from zero; full SOP library, IT-ops alignment, on-time go-live for STARLUX Airlines</td>
+                        <th>專案名稱</th><th>角色 / 人數</th><th>期程</th><th>系統 / 核心成果</th>
                     </tr>
-                    <tr>
-                        <td class="font-semibold text-slate-900">Jeppesen CMS Implementation</td>
-                        <td>Testing Lead (10)</td>
-                        <td class="whitespace-nowrap">18 months</td>
-                        <td>Jeppesen (SE/Boeing) — Legacy data migration & UAT for EVA Air's global fleet; endorsed by Boeing/Jeppesen</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-slate-900">CTi System Optimization</td>
-                        <td>Project Manager (3)</td>
-                        <td class="whitespace-nowrap">3 months</td>
-                        <td>CTi Pegasys — Post-launch scheduling rule debug; iterative feedback loops improved system performance</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-slate-900">Braathens Regional Airlines Data Optimization</td>
-                        <td>Data Analyst (3)</td>
-                        <td class="whitespace-nowrap">12 months</td>
-                        <td>Operational data → business insights; reduced crew dispatch costs for client (Sweden)</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-slate-900">Brussels Airlines Training Replanning</td>
-                        <td>Planning Lead (3)</td>
-                        <td class="whitespace-nowrap">7 months</td>
-                        <td>Re-engineered training flight task flow documentation; achieved 100% regulatory compliance</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-slate-900">Cross-Cultural Team Management</td>
-                        <td>Program Manager (3)</td>
-                        <td class="whitespace-nowrap">8 months</td>
-                        <td>Built high-trust communication framework for multinational remote team across 4+ time zones</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-slate-900">Teams Knowledge Base Restructure</td>
-                        <td>Project Manager (2)</td>
-                        <td class="whitespace-nowrap">3 months</td>
-                        <td>Centralized knowledge management — reduced organizational information gaps by 40%</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-slate-900">IQSMS Safety Management System</td>
-                        <td>Testing Lead (3)</td>
-                        <td class="whitespace-nowrap">4 months</td>
-                        <td>IQSMS — Safety management system implementation, testing & acceptance for STARLUX Airlines</td>
-                    </tr>
-                    <tr>
-                        <td class="font-semibold text-slate-900">Crew Tech Assessment (Jetstar)</td>
-                        <td>Tech Evaluator (4)</td>
-                        <td class="whitespace-nowrap">3 months</td>
-                        <td>Strategic technology evaluation for Jetstar's global crew scheduling systems</td>
-                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td class="font-semibold text-slate-900">CTi Pegasys 系統導入（Greenfield）</td><td>專案經理（5人以上）</td><td class="whitespace-nowrap">22 個月</td><td>CTi Pegasys（澳洲廠商）— 從零建立，含完整 SOP、IT 對齊文件，系統順利上線</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Jeppesen CMS 系統導入</td><td>測試負責人（10人）</td><td class="whitespace-nowrap">18 個月</td><td>Jeppesen（瑞典廠商 / 波音）— 完成長榮航空全球機隊資料移轉與 UAT，獲波音/Jeppesen 高度評價</td></tr>
+                    <tr><td class="font-semibold text-slate-900">CTi 系統優化</td><td>專案經理（3人）</td><td class="whitespace-nowrap">3 個月</td><td>CTi Pegasys — 上線後排班法規 Debug，迭代優化提升系統效能</td></tr>
+                    <tr><td class="font-semibold text-slate-900">BRA 數據優化</td><td>數據分析師（3人）</td><td class="whitespace-nowrap">12 個月</td><td>技術數據轉化為業務洞察，優化瑞典 Braathens 組員調度並降低營運成本</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Brussels Airlines 訓練航班重新規劃</td><td>規劃負責人（3人）</td><td class="whitespace-nowrap">7 個月</td><td>重建訓練任務文件架構，達成 100% 法規合規</td></tr>
+                    <tr><td class="font-semibold text-slate-900">跨文化衝突管理</td><td>計畫經理（3人）</td><td class="whitespace-nowrap">8 個月</td><td>建立跨 4 個以上時區之跨國遠距團隊高信任溝通管道</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Teams 知識庫重構</td><td>專案經理（2人）</td><td class="whitespace-nowrap">3 個月</td><td>建立集中式知識管理體系，組織資訊落差縮減 40%</td></tr>
+                    <tr><td class="font-semibold text-slate-900">IQSMS 安全管理系統</td><td>測試負責人（3人）</td><td class="whitespace-nowrap">4 個月</td><td>IQSMS — 安全管理系統導入、測試與系統驗收，星宇航空</td></tr>
+                    <tr><td class="font-semibold text-slate-900">Jetstar 機組科技評估</td><td>技術評估員（4人）</td><td class="whitespace-nowrap">3 個月</td><td>捷星航空全球機組排班系統之策略性技術評估</td></tr>
                 </tbody>
             </table>
         </div>
-        <!-- Summary stats -->
         <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mt-10">
             <div class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-100">
                 <div class="text-3xl font-bold text-brand-blue mb-1">9</div>
-                <div class="text-sm text-slate-500">Major Projects</div>
+                <div class="text-sm text-slate-500"><span data-en>Major Projects</span><span data-zh>重大專案</span></div>
             </div>
             <div class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-100">
                 <div class="text-3xl font-bold text-brand-blue mb-1">79</div>
-                <div class="text-sm text-slate-500">Months Delivered</div>
+                <div class="text-sm text-slate-500"><span data-en>Months Delivered</span><span data-zh>個月交付</span></div>
             </div>
             <div class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-100">
                 <div class="text-3xl font-bold text-brand-blue mb-1">4</div>
-                <div class="text-sm text-slate-500">Countries Served</div>
+                <div class="text-sm text-slate-500"><span data-en>Countries Served</span><span data-zh>服務國家</span></div>
             </div>
             <div class="text-center p-6 bg-slate-50 rounded-2xl border border-slate-100">
                 <div class="text-3xl font-bold text-brand-blue mb-1">2</div>
-                <div class="text-sm text-slate-500">CMS Systems (Jeppesen · CTi)</div>
+                <div class="text-sm text-slate-500"><span data-en>CMS Systems</span><span data-zh>CMS 系統</span></div>
             </div>
         </div>
     </div>
@@ -313,21 +321,23 @@
 <section id="skills" class="py-20 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
-            <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">Certifications & Skills</h2>
+            <h2 class="text-3xl font-bold text-slate-900 sm:text-4xl">
+                <span data-en>Certifications & Skills</span><span data-zh>證照與專業技能</span>
+            </h2>
             <div class="w-24 h-1 bg-brand-blue mx-auto mt-4 rounded-full"></div>
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <!-- Certifications -->
             <div>
                 <h3 class="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
-                    <i class="fas fa-certificate text-brand-blue mr-3"></i> Professional Certifications
+                    <i class="fas fa-certificate text-brand-blue mr-3"></i>
+                    <span data-en>Professional Certifications</span><span data-zh>專業證照</span>
                 </h3>
                 <div class="space-y-4">
                     <div class="flex items-start bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
                         <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
                         <div class="ml-4">
                             <h4 class="text-lg font-bold text-slate-900">Project Management Professional (PMP)®</h4>
-                            <p class="text-slate-500 text-sm">PMI License #4379030 · Obtained May 2026</p>
+                            <p class="text-slate-500 text-sm">PMI License #4379030 · <span data-en>Obtained May 2026</span><span data-zh>2026年5月取得</span></p>
                         </div>
                     </div>
                     <div class="flex items-start bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
@@ -347,15 +357,15 @@
                     <div class="flex items-start bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
                         <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
                         <div class="ml-4">
-                            <h4 class="text-lg font-bold text-slate-900">CAA Safety Management System (SMS)</h4>
-                            <p class="text-slate-500 text-sm">Civil Aviation Authority of Taiwan · 2018</p>
+                            <h4 class="text-lg font-bold text-slate-900"><span data-en>CAA Safety Management System (SMS)</span><span data-zh>民航局安全管理系統（SMS）</span></h4>
+                            <p class="text-slate-500 text-sm"><span data-en>Civil Aviation Authority of Taiwan · 2018</span><span data-zh>交通部民用航空局 · 2018年</span></p>
                         </div>
                     </div>
                     <div class="flex items-start bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
                         <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
                         <div class="ml-4">
-                            <h4 class="text-lg font-bold text-slate-900">Certified Internal Lecturer</h4>
-                            <p class="text-slate-500 text-sm">STARLUX Airlines · Scheduling, fatigue & aviation regulations</p>
+                            <h4 class="text-lg font-bold text-slate-900"><span data-en>Certified Internal Lecturer</span><span data-zh>企業內部講師資格認證</span></h4>
+                            <p class="text-slate-500 text-sm"><span data-en>STARLUX Airlines · Scheduling, fatigue & aviation regulations</span><span data-zh>星宇航空 · 排班法規、疲勞法規及航務組織</span></p>
                         </div>
                     </div>
                     <div class="flex items-start bg-white p-4 rounded-xl border border-slate-100 shadow-sm">
@@ -369,53 +379,56 @@
                         <i class="fas fa-check-circle text-green-500 text-xl mt-1"></i>
                         <div class="ml-4">
                             <h4 class="text-lg font-bold text-slate-900">Microsoft Azure Fundamentals</h4>
-                            <p class="text-slate-500 text-sm">AZ-900 Learning Path — 4 modules completed · Microsoft Learn</p>
+                            <p class="text-slate-500 text-sm"><span data-en>AZ-900 Learning Path — 4 modules · Microsoft Learn</span><span data-zh>AZ-900 學習路徑 — 4 模組完成 · Microsoft Learn</span></p>
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Languages + Skills -->
             <div>
                 <h3 class="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
-                    <i class="fas fa-language text-brand-blue mr-3"></i> Languages
+                    <i class="fas fa-language text-brand-blue mr-3"></i>
+                    <span data-en>Languages</span><span data-zh>語言能力</span>
                 </h3>
                 <div class="flex flex-wrap gap-3 mb-10">
-                    <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-100">English — Fluent (TOEIC 940)</span>
-                    <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-100">Mandarin Chinese — Native</span>
-                    <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-100">French — Intermediate (DELF B1)</span>
-                    <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-100">German — Conversational</span>
+                    <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-100"><span data-en>English — Fluent (TOEIC 940)</span><span data-zh>英文精通（TOEIC 940）</span></span>
+                    <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-100"><span data-en>Mandarin — Native</span><span data-zh>中文（母語）</span></span>
+                    <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-100"><span data-en>French — Intermediate (DELF B1)</span><span data-zh>法文中等（DELF B1）</span></span>
+                    <span class="px-4 py-2 bg-indigo-50 text-indigo-700 rounded-lg font-medium border border-indigo-100"><span data-en>German — Conversational</span><span data-zh>德文可溝通</span></span>
                 </div>
-
                 <h3 class="text-2xl font-semibold text-slate-800 mb-6 flex items-center">
-                    <i class="fas fa-tools text-brand-blue mr-3"></i> Core Competencies
+                    <i class="fas fa-tools text-brand-blue mr-3"></i>
+                    <span data-en>Core Competencies</span><span data-zh>核心職能</span>
                 </h3>
                 <div class="flex flex-wrap gap-3">
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">CMS Implementation (Jeppesen · CTi Pegasys)</span>
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">Scheduling Rule Debug & Validation</span>
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">Project Planning & Execution</span>
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">Cross-Cultural B2B Stakeholder Management</span>
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">Bilingual Technical Documentation (EN/ZH)</span>
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">Forward Planning & Schedule Control</span>
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">Risk Management</span>
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">AI Prompt Engineering</span>
-                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100 shadow-sm">Jira · Asana · Confluence · MS Office</span>
+                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100"><span data-en>CMS Implementation (Jeppesen · CTi)</span><span data-zh>CMS 系統導入（Jeppesen · CTi）</span></span>
+                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100"><span data-en>Scheduling Rule Debug & Validation</span><span data-zh>排班法規 Debug 與驗證</span></span>
+                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100"><span data-en>Project Planning & Execution</span><span data-zh>專案規劃與執行</span></span>
+                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100"><span data-en>Cross-Cultural B2B Stakeholder Management</span><span data-zh>跨文化 B2B 利害關係人管理</span></span>
+                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100"><span data-en>Bilingual Technical Documentation (EN/ZH)</span><span data-zh>中英雙語技術文件撰寫</span></span>
+                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100"><span data-en>Forward Planning & Schedule Control</span><span data-zh>前瞻規劃與時程控管</span></span>
+                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100"><span data-en>Risk Management</span><span data-zh>風險管理</span></span>
+                    <span class="px-4 py-2 bg-blue-50 text-brand-blue rounded-full text-sm font-medium border border-blue-100">Jira · Asana · Confluence · MS Office</span>
                 </div>
             </div>
         </div>
     </div>
 </section>
 
-<!-- CONTACT / FOOTER -->
+<!-- CONTACT -->
 <footer id="contact" class="bg-brand-navy pt-16 pb-8 border-t border-slate-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-center">
             <div>
-                <h2 class="text-3xl font-bold text-white mb-4">Let's Connect</h2>
-                <p class="text-slate-400 mb-6 max-w-md">Whether you're looking for a seasoned project manager for complex system implementations or seeking expertise in aviation crew management, I'm ready to help.</p>
+                <h2 class="text-3xl font-bold text-white mb-4">
+                    <span data-en>Let's Connect</span><span data-zh>與我聯絡</span>
+                </h2>
+                <p class="text-slate-400 mb-6 max-w-md">
+                    <span data-en>Whether you're looking for a seasoned project manager for complex system implementations or expertise in aviation crew management, I'm ready to help.</span>
+                    <span data-zh>無論您正在尋找能主導複雜系統導入的資深專案管理師，或需要航空機組管理的專業諮詢，歡迎與我聯絡。</span>
+                </p>
                 <div class="flex items-center space-x-4 text-slate-300 mb-3">
                     <i class="fas fa-map-marker-alt text-blue-500 w-5 text-center"></i>
-                    <span>New Taipei City, Taiwan</span>
+                    <span><span data-en>New Taipei City, Taiwan</span><span data-zh>台灣新北市</span></span>
                 </div>
                 <div class="flex items-center space-x-4 text-slate-300 mb-3">
                     <i class="fas fa-envelope text-blue-500 w-5 text-center"></i>
@@ -431,20 +444,28 @@
                     <a href="https://linkedin.com/in/chengli-chen" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-brand-blue hover:text-white transition-all duration-300">
                         <i class="fab fa-linkedin-in text-xl"></i>
                     </a>
-                    <a href="https://rob94321010-dotcom.github.io/robchen-portfolio" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-brand-blue hover:text-white transition-all duration-300">
-                        <i class="fab fa-github text-xl"></i>
+                    <a href="https://rob94321010-dotcom.github.io/robchen-portfolio/" target="_blank" class="w-12 h-12 rounded-full bg-slate-800 flex items-center justify-center text-slate-400 hover:bg-brand-blue hover:text-white transition-all duration-300" title="Creative Portfolio">
+                        <i class="fas fa-palette text-xl"></i>
                     </a>
                 </div>
             </div>
         </div>
         <div class="border-t border-slate-800 pt-8 flex flex-col md:flex-row justify-between items-center">
-            <p class="text-slate-500 text-sm">&copy; 2026 Rob Chen (陳正立). All rights reserved.</p>
-            <p class="text-slate-600 text-sm mt-2 md:mt-0">PMP® #4379030 · TOEIC 940 · 79 Months Enterprise Delivery</p>
+            <p class="text-slate-500 text-sm">&copy; 2026 Rob Chen（陳正立）. <span data-en>All rights reserved.</span><span data-zh>版權所有。</span></p>
+            <p class="text-slate-600 text-sm mt-2 md:mt-0">PMP® #4379030 · TOEIC 940 · 79 <span data-en>Months Enterprise Delivery</span><span data-zh>個月企業系統交付</span></p>
         </div>
     </div>
 </footer>
 
 <script>
+    function setLang(lang) {
+        document.body.className = 'bg-brand-light text-slate-800 font-sans antialiased lang-' + lang;
+        document.querySelectorAll('.lang-btn').forEach(function(btn) {
+            btn.classList.toggle('active', btn.textContent === (lang === 'zh' ? '中文' : 'EN'));
+        });
+        document.documentElement.lang = lang === 'zh' ? 'zh-TW' : 'en';
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
         const btn = document.getElementById('mobile-menu-btn');
         const menu = document.getElementById('mobile-menu');
@@ -466,9 +487,8 @@
             });
         });
 
-        const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
-            nav.classList.toggle('shadow-md', window.scrollY > 50);
+            document.querySelector('nav').classList.toggle('shadow-md', window.scrollY > 50);
         });
     });
 </script>
