@@ -38,6 +38,20 @@
         body.lang-en [data-zh] { display: none !important; }
         body.lang-zh [data-en] { display: none !important; }
         .hero-tag { background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.3); color: white; font-size: 12px; padding: 4px 12px; border-radius: 20px; }
+        /* Mobile: one card per project instead of a wide 5-column table */
+        @media (max-width: 640px) {
+            .proj-table, .proj-table tbody, .proj-table tr, .proj-table td { display: block; }
+            .proj-table thead { display: none; }
+            .proj-table tr { padding: 14px 16px; border-bottom: 1px solid #e2e8f0; }
+            .proj-table tr:last-child { border-bottom: none; }
+            .proj-table tr:nth-child(even) { background: #f8fafc; }
+            .proj-table tr:nth-child(even) td, .proj-table tr:hover td { background: transparent; }
+            .proj-table td { padding: 0; border-bottom: none; }
+            .proj-table td:first-child { font-size: 14px; line-height: 1.4; margin-bottom: 4px; }
+            .proj-table td:nth-child(2), .proj-table td:nth-child(3), .proj-table td:nth-child(4) { display: inline; color: #64748b; font-size: 12px; }
+            .proj-table td:nth-child(3)::before, .proj-table td:nth-child(4)::before { content: ' · '; }
+            .proj-table td:last-child { margin-top: 6px; line-height: 1.5; }
+        }
     </style>
 </head>
 <body class="bg-brand-light text-slate-800 font-sans antialiased lang-en">
